@@ -1,0 +1,13 @@
+[Unit]
+Description=Perfect deployed websocket
+
+[Service]
+Type=simple
+WorkingDirectory=/perfect-deployed/websocket
+EnvironmentFile=/perfect-deployed/websocket//env
+ExecStart=/perfect-deployed/websocket/WebSocket
+Restart=always
+PIDFile=/var/run/websocket.pid
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,6 @@
+framework module Pods_RealTimeChatWebSocketAppIOS {
+  umbrella header "Pods-RealTimeChatWebSocketAppIOS-umbrella.h"
+
+  export *
+  module * { export * }
+}

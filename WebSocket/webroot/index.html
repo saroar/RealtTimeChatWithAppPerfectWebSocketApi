@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>WebSocket Chat Test</title>
+        
+    </head>
+    
+    <body>
+        <h2>PerfectChat Server Example</h2>
+        <p>Chat Server joined on load. Press send to broadcast to others, echo to bounce a message off the Server</p>
+        <div id = "main_chat" style="float: left;">
+            <div id="left_side" style="float: left;width:350px; overflow:scroll">
+                <div id="output"></div>
+            </div>
+            <div id="right_side" style="float: left; width:410px; max-height: 400px;overflow:scroll">
+                <div id="clients"></div>
+            </div>
+            
+            <div id="input_row" style="float: left; clear: both; width: 80%;">
+                <input type=text id="chatinput" style="width=80%;" ></input>
+                
+                <button id="sendButton" >Send</button>
+                <button id="echoButton" >Echo</button>
+            </div>
+        </div>
+        
+    </body>
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js" ></script>
+    <script src="/js/chatfunctions.js" ></script>
+    <script language="javascript" type="text/javascript">
+        var wsUri = "ws://"+ location.host+"/api/v1/chat";
+        var httpURI = "http://"+location.host+"/";
+        var output, input, send;
+        var ws_params = {"channel":"trial1"};
+        $("#chatinput").keyup(function (e) {
+                              if (e.keyCode == 13) {
+                              doSend();
+                              }
+                              });
+                              $("#sendButton").click(function(e) {
+                                                     doSend();
+                                                     });
+                                                     $("#echoButton").click(function(e) {
+                                                                            doEcho();
+                                                                            });
+                                                                            
+                                                                            window.addEventListener("load", init, false);
+        </script>
+</html>

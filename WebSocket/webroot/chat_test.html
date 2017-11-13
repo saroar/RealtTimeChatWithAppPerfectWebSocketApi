@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>WebSocket Echo Test</title>
+        <script language="javascript" type="text/javascript">
+            var wsUri = "ws://"+ location.host+"/api/v1/chat";
+            var httpURI = "http://"+location.host+"/";
+            var output, input, send;
+            ws_params = {};
+            
+            function init() {
+                output = document.getElementById("output");
+                input = document.getElementById("input");
+                requestJoin();
+                
+            }
+        function requestJoin() {
+            testWebSocket("chatChannel");
+            
+        }
+        
+        function testWebSocket(channel, clientid) {
+            websocket = new WebSocket(wsUri);
+            websocket.onopen = function(evt) { onOpen(evt) };
+            websocket.onclose = function(evt) { onClose(evt) };
+            websocket.onmessage = function(evt) { onMessage(evt) };
+            websocket.onerror = function(evt) { onError(evt) };
+        }
+        function onOpen(evt) {
+            if(ws_params.client_id == ""){
+                writeToScreen("Connecting: "+evt.data);
+                valuetosend = {"cmd": "join", "msg": "joining channel "+channel};
+                
+            } else {
+                writeToScreen("CONNECTED: "+evt.data);
+                valuetosend = {"cmd": "register", "msg": "registered "+ws_params.client_id, "clientid": ws_params.client_id, "channelid": ws_params.channel_id};
+                
+            }
+            websocket.send(JSON.stringify(valuetosend));
+            
+            writeToScreen('<span style="color: red;">Registering:<\/span> ');
+        }
+        function onClose(evt) {
+            writeToScreen("DISCONNECTED");
+        }
+        function onMessage(evt) {
+            writeToScreen('<span style="color: blue;">RESPONSE: ' + evt.data+'<\/span>');
+        }
+        function onError(evt) {
+            writeToScreen('<span style="color: red;">ERROR:<\/span> ' + evt.data);
+        }
+        function doSend() {
+            writeToScreen('<span style="color: red;">SENDING:<\/span> ' + input.value);
+            valuetosend = {"cmd": "send", "msg": input.value, "clientid": ws_params.client_id, "channelid": ws_params.channel_id};
+            websocket.send(JSON.stringify(valuetosend));
+        }
+        function doEcho() {
+            writeToScreen('<span style="color: red;">Echo:<\/span> ' + input.value);
+            valuetosend = {"cmd": "echo", "msg": input.value, "clientid": ws_params.client_id, "channelid": ws_params.channel_id};
+            websocket.send(JSON.stringify(valuetosend));
+        }
+        function writeToScreen(message) {
+            output.innerHTML += message
+        }
+        window.addEventListener("load", init, false);
+            </script>
+    </head>
+    
+    <body>
+        <h2>Chat Server simple</h2>
+        <p>Click the Send button to transmit the text to the current Channel. <br> Click the Echo button to transmit text to server which will echo back the text.</p>
+        <textarea id="input" cols=24 rows=28 >Sample Text</textarea>
+        <button onclick="doSend()">Send</button><button onclick="doEcho()">Echo</button>
+        <div id="output"</div>
+    </body>
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js" ></script>
+</html>
