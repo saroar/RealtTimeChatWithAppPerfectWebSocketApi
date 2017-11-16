@@ -8,7 +8,10 @@
   6. WebChat
   
 ### Site Link
-  http://34.198.94.121:8181
+  cd WebSocket 
+  run ` swift build`
+  then run `./.build/x86_64-apple-macosx10.10/debug/WebSocket` if are on macbook
+  http://localhost:8181/api/v1/chat
   
 ### IOS 
   Just download it and start to chat wihout any configuration
