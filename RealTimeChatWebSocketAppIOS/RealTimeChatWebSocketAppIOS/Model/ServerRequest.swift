@@ -23,17 +23,28 @@ extension ServerRequest {
     
     static func from(data: Data) -> ServerRequest? {
         let decoder = JSONDecoder()
-        return try? decoder.decode(ServerRequest.self, from: data)
+        do {
+            return try decoder.decode(ServerRequest.self, from: data)
+        } catch {
+            print(error.localizedDescription)
+            return nil
+        }
+        
     }
     
     var jsonData: Data? {
         let encoder = JSONEncoder()
-        return try? encoder.encode(self)
+        do {
+            return try encoder.encode(self)
+        } catch {
+            print(error.localizedDescription)
+            return nil
+        }
     }
     
     var jsonString: String? {
         guard let data = self.jsonData else { return nil }
-        return String(data: data , encoding: .utf8)
+        return String(data: data, encoding: .utf8)
     }
 }
 

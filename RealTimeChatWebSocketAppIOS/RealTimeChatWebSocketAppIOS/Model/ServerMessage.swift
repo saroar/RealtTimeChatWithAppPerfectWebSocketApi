@@ -21,12 +21,23 @@ extension ServerMessage {
     
     static func from(data: Data) -> ServerMessage? {
         let decoder = JSONDecoder()
-        return try? decoder.decode(ServerMessage.self, from: data)
+        do {
+            return try decoder.decode(ServerMessage.self, from: data)
+        } catch  {
+            print(error.localizedDescription)
+            return nil
+        }
+        
     }
     
     var jsonData: Data? {
         let encoder = JSONEncoder()
-        return try? encoder.encode(self)
+        do {
+            return try encoder.encode(self)
+        } catch {
+            print(error.localizedDescription)
+            return nil
+        }
     }
     
     var jsonString: String? {

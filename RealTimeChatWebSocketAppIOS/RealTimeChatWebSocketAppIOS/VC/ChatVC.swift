@@ -28,8 +28,10 @@ class ChatVC: UIViewController {
         chatService.delegate = self
         chatService.connect()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(showingKeyBoard), name: NSNotification.Name(rawValue: "UIKeyboardWillShowNotification"), object: nil )
+        Notification.Name.UIKeyboardWillShow
+        Notification.Name.UIKeyboardWillHide
         
+        NotificationCenter.default.addObserver(self, selector: #selector(showingKeyBoard), name: NSNotification.Name(rawValue: "UIKeyboardWillShowNotification"), object: nil )
         NotificationCenter.default.addObserver(self, selector: #selector(hidingKeyboard), name: NSNotification.Name(rawValue: "UIKeyboardWillHideNotification"), object: nil )
     }
     

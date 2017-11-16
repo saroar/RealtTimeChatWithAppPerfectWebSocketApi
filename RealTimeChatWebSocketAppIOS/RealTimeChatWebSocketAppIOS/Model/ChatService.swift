@@ -17,10 +17,10 @@ protocol ChatServiceDelegate: class {
 typealias JSON = [String:Any]
 
 struct WSParams {
-    let channel: String
+    let channel:  String
     var clientId: String?
     var messages: [String]
-    var clients: [String]
+    var clients:  [String]
 }
 
 struct ServerCommands {
@@ -30,9 +30,9 @@ struct ServerCommands {
 
 class ChatService {
     
-    let socket = WebSocket(url: URL(string: "ws://34.198.94.121:8181/api/v1/chat")!, protocols: ["chat"])
+    let socket = WebSocket(url: URL(string: "ws://localhost:8181/api/v1/chat")!, protocols: ["chat"])
     var wsParams = WSParams(channel: "trial1", clientId: nil, messages: [], clients: [])
-    var delegate: ChatServiceDelegate?
+    weak var delegate: ChatServiceDelegate?
     
     deinit {
         socket.disconnect(forceTimeout: 0)

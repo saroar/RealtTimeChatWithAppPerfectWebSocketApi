@@ -1,5 +1,5 @@
 // Generated automatically by Perfect Assistant Application
-// Date: 2017-11-10 08:09:05 +0000
+// Date: 2017-11-16 21:27:41 +0000
 import PackageDescription
 let package = Package(
 	name: "WebSocket",
