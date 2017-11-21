@@ -55,7 +55,11 @@ extension ChatService {
     }
     
     func sendMessage(_ message: String) {
-        let request = ServerRequest(channelId: wsParams.channel, clientId: wsParams.clientId, command: ServerCommands.send, message: "iOS: \(message)")
+        let request = ServerRequest(channelId: wsParams.channel,
+                                    clientId: wsParams.clientId,
+                                    command: ServerCommands.send,
+                                    message: "iOS: \(message)"
+        )
         sendRequest(request)
     }
     

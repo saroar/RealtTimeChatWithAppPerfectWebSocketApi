@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		761BCDFB6121BF7D7146B76D /* Pods_RealTimeChatWebSocketAppIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 249B21F740C20A57AE2BCD63 /* Pods_RealTimeChatWebSocketAppIOS.framework */; };
 		C3162A581FB9BF020018066C /* ChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3162A571FB9BF020018066C /* ChatService.swift */; };
+		C3647EB31FC0B87B00CD41C9 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3647EB21FC0B87B00CD41C9 /* APIClient.swift */; };
 		C36675161FB9C45300A94AC2 /* ServerRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36675151FB9C45300A94AC2 /* ServerRequest.swift */; };
 		C36675181FB9D2DF00A94AC2 /* ServiceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36675171FB9D2DF00A94AC2 /* ServiceResponse.swift */; };
 		C366751A1FB9D85D00A94AC2 /* ServerMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36675191FB9D85D00A94AC2 /* ServerMessage.swift */; };
@@ -24,6 +25,7 @@
 		B446811BAA1075A26E3FEEEF /* Pods-RealTimeChatWebSocketAppIOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealTimeChatWebSocketAppIOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RealTimeChatWebSocketAppIOS/Pods-RealTimeChatWebSocketAppIOS.debug.xcconfig"; sourceTree = "<group>"; };
 		C29181157E703C0865350D0B /* Pods-RealTimeChatWebSocketAppIOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealTimeChatWebSocketAppIOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-RealTimeChatWebSocketAppIOS/Pods-RealTimeChatWebSocketAppIOS.release.xcconfig"; sourceTree = "<group>"; };
 		C3162A571FB9BF020018066C /* ChatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatService.swift; sourceTree = "<group>"; };
+		C3647EB21FC0B87B00CD41C9 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		C36675151FB9C45300A94AC2 /* ServerRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerRequest.swift; sourceTree = "<group>"; };
 		C36675171FB9D2DF00A94AC2 /* ServiceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceResponse.swift; sourceTree = "<group>"; };
 		C36675191FB9D85D00A94AC2 /* ServerMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerMessage.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				C3162A571FB9BF020018066C /* ChatService.swift */,
+				C3647EB21FC0B87B00CD41C9 /* APIClient.swift */,
 				C36675151FB9C45300A94AC2 /* ServerRequest.swift */,
 				C36675171FB9D2DF00A94AC2 /* ServiceResponse.swift */,
 				C36675191FB9D85D00A94AC2 /* ServerMessage.swift */,
@@ -248,6 +251,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3CB7A2F1FB9B7A000A34418 /* ChatVC.swift in Sources */,
+				C3647EB31FC0B87B00CD41C9 /* APIClient.swift in Sources */,
 				C3CB7A2D1FB9B7A000A34418 /* AppDelegate.swift in Sources */,
 				C366751A1FB9D85D00A94AC2 /* ServerMessage.swift in Sources */,
 				C36675161FB9C45300A94AC2 /* ServerRequest.swift in Sources */,

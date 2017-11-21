@@ -27,7 +27,6 @@ extension ServerMessage {
             print(error.localizedDescription)
             return nil
         }
-        
     }
     
     var jsonData: Data? {

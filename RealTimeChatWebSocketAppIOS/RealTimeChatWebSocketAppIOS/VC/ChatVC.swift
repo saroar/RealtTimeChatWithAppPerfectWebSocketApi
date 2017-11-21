@@ -52,6 +52,7 @@ class ChatVC: UIViewController {
 extension ChatVC: ChatServiceDelegate {
     func newMessage(_ message: String) {
         chatView.text = chatView.text.appending("\n \(message)")
+        print("newMessage", message)
     }
     
     func setStatus(_ status: String) {

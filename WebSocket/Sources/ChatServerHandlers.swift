@@ -58,9 +58,11 @@ class Channel {
         
         do {
             var fullMsg: [String:Any] = ["msg":msg, "error":""]
+            
             if let cmd:String = request {
                 fullMsg["request"] = cmd
             }
+            
             fullMsg["clientid"] = fromClientId
             let jsonCoded = try fullMsg.jsonEncodedString()
             
@@ -102,90 +104,106 @@ class Channel {
         self.dispatchMessage(msg: client.clientId, fromClientId: client.clientId, request: "client_add")
     }
     
+//    func assignSocket(clientId: String, socket: WebSocket) -> Bool {
+//        if let client = self.clients[clientId] {
+//
+//            client.socket = socket
+//            Threading.dispatch(closure: {
+//                self.startRead(clientId: clientId)
+//            })
+//            return true
+//
+//        }
+//        return false
+//    }
+    
     func assignSocket(clientId: String, socket: WebSocket) -> Bool {
-        if let client = self.clients[clientId] {
-
-            client.socket = socket
-            Threading.dispatch(closure: {
-                self.startRead(clientId: clientId)
-            })
-            return true
-            
+        guard let client = self.clients[clientId] else {
+            return false
         }
-        return false
+            
+        client.socket = socket
+        Threading.dispatch(closure: {
+            self.startRead(clientId: clientId)
+        })
+        return true
+
     }
     
     func removeClient(clientId: String) {
-        if let oldClient = self.clients[clientId] {
-            oldClient.socket?.close()
-            self.clients.removeValue(forKey: clientId)
-            if self.clients.count == 0 {
-                ChatWSHandler.removeChannel(channelName: self.channelName)
-            } else {
-                self.dispatchMessage(msg: clientId, fromClientId: "999", request: "client_remove")
-            }
-            
+        guard let oldClient = self.clients[clientId] else { return }
+        
+        oldClient.socket?.close()
+        self.clients.removeValue(forKey: clientId)
+        if self.clients.count == 0 {
+            ChatWSHandler.removeChannel(channelName: self.channelName)
+        } else {
+            self.dispatchMessage(msg: clientId, fromClientId: "999", request: "client_remove")
         }
     }
     
     func startRead(clientId: String) {
-        if let client = self.clients[clientId] {
-            return client.socket!.readStringMessage { string, opcode, final in
-                guard let string = string else {
-                    print("Channel \(self.channelName) client \(clientId) closing")
-                    self.removeClient(clientId: clientId)
-                    return
-                }
-                print("read msg: \(string) op: \(opcode) fin: \(final)")
-                do {
-                    if let decoded = try string.jsonDecode() as? Dictionary<String,Any> {
-                        if let cmd = decoded["cmd"] as? String {
-                            switch cmd {
-                            case "send":
-                                if let msg:String = decoded["msg"] as? String {
-                                    do {
-                                        if let decodedMsg:String = try msg.jsonDecode() as? String {
-                                            let encoded = try decodedMsg.jsonEncodedString()
-                                            self.dispatchMessage(msg: encoded, fromClientId: clientId, request: cmd)
-                                            return self.startRead(clientId: clientId)
-                                        }
-                                    } catch {
-                                        
-                                        if let clientid = decoded["clientid"] as? String,
-                                            let msg = decoded["msg"] as? String {
-                                            self.dispatchMessage(msg: msg, fromClientId: clientid, request: cmd)
-                                            return self.startRead(clientId: clientid)
-                                            
-                                        } else {
-                                            
-                                            self.dispatchMessage(msg: msg, fromClientId: clientId, request: cmd)
-                                            return self.startRead(clientId: clientId)
-                                            
-                                        }
-                                    }
-                                }
-                            case "echo":
-                                if let msg = decoded["msg"] as? String {
-                                    if let clientid = decoded["clientid"] as? String {
-                                        self.echoMessage(msg: msg, fromClientId: clientid, request: cmd)
-                                        return self.startRead(clientId: clientid)
-                                    } else {
-                                        self.echoMessage(msg: msg, fromClientId: clientId, request: cmd)
-                                        return self.startRead(clientId: clientId)
-                                    }
-                                }
-                            default: ()
-                            Log.info(message: "pulse from client: \(clientId)")
+        guard let client = self.clients[clientId] else {
+            self.removeClient(clientId: clientId)
+            return
+        }
+        
+        return client.socket!.readStringMessage { string, opcode, final in
+            guard let string = string else {
+                print("Channel \(self.channelName) client \(clientId) closing")
+                self.removeClient(clientId: clientId)
+                return
+            }
+            print("read msg: \(string) op: \(opcode) fin: \(final)")
+            do {
+                guard let decoded = try string.jsonDecode() as? Dictionary<String,Any> else { return }
+                guard let cmd = decoded["cmd"] as? String else { return }
+                
+                switch cmd {
+                case "send":
+                    guard let msg:String = decoded["msg"] as? String else { return }
+                    do {
+                        guard let decodedMsg:String = try msg.jsonDecode() as? String else { return }
+                        let encoded = try decodedMsg.jsonEncodedString()
+                        self.dispatchMessage(msg: encoded, fromClientId: clientId, request: cmd)
+                        return self.startRead(clientId: clientId)
+                        
+                    } catch {
+                        
+                        if let clientid = decoded["clientid"] as? String,
+                            let msg = decoded["msg"] as? String {
+                            self.dispatchMessage(msg: msg, fromClientId: clientid, request: cmd)
+                            return self.startRead(clientId: clientid)
+                            
+                        } else {
+                            
+                            self.dispatchMessage(msg: msg, fromClientId: clientId, request: cmd)
                             return self.startRead(clientId: clientId)
-                            }
+                            
                         }
                     }
-                } catch {
-                    print ("invalid msg from channel \(self.channelName) client \(clientId). Terminating client.")
+                    
+                case "echo":
+                    guard let msg = decoded["msg"] as? String else { return }
+                    if let clientid = decoded["clientid"] as? String {
+                        self.echoMessage(msg: msg, fromClientId: clientid, request: cmd)
+                        return self.startRead(clientId: clientid)
+                    } else {
+                        self.echoMessage(msg: msg, fromClientId: clientId, request: cmd)
+                        return self.startRead(clientId: clientId)
+                    }
+                
+                default: ()
+                    Log.info(message: "pulse from client: \(clientId)")
+                    return self.startRead(clientId: clientId)
                 }
+                
+            } catch {
+                print ("invalid msg from channel \(self.channelName) client \(clientId). Terminating client.")
             }
         }
-        self.removeClient(clientId: clientId)
+        
+        
     }
 }
 
