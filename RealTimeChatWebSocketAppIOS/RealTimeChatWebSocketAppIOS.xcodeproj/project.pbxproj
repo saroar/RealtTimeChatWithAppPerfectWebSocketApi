@@ -13,6 +13,7 @@
 		C36675161FB9C45300A94AC2 /* ServerRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36675151FB9C45300A94AC2 /* ServerRequest.swift */; };
 		C36675181FB9D2DF00A94AC2 /* ServiceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36675171FB9D2DF00A94AC2 /* ServiceResponse.swift */; };
 		C366751A1FB9D85D00A94AC2 /* ServerMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36675191FB9D85D00A94AC2 /* ServerMessage.swift */; };
+		C38F7C5B1FCC325800B3E736 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38F7C5A1FCC325800B3E736 /* Helpers.swift */; };
 		C3CB7A2D1FB9B7A000A34418 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CB7A2C1FB9B7A000A34418 /* AppDelegate.swift */; };
 		C3CB7A2F1FB9B7A000A34418 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CB7A2E1FB9B7A000A34418 /* ChatVC.swift */; };
 		C3CB7A321FB9B7A000A34418 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3CB7A301FB9B7A000A34418 /* Main.storyboard */; };
@@ -29,6 +30,7 @@
 		C36675151FB9C45300A94AC2 /* ServerRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerRequest.swift; sourceTree = "<group>"; };
 		C36675171FB9D2DF00A94AC2 /* ServiceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceResponse.swift; sourceTree = "<group>"; };
 		C36675191FB9D85D00A94AC2 /* ServerMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerMessage.swift; sourceTree = "<group>"; };
+		C38F7C5A1FCC325800B3E736 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		C3CB7A291FB9B7A000A34418 /* RealTimeChatWebSocketAppIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealTimeChatWebSocketAppIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3CB7A2C1FB9B7A000A34418 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C3CB7A2E1FB9B7A000A34418 /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				C3CB7A2C1FB9B7A000A34418 /* AppDelegate.swift */,
+				C38F7C5A1FCC325800B3E736 /* Helpers.swift */,
 				C3CB7A381FB9B7A000A34418 /* Info.plist */,
 				C3CB7A3F1FB9BD3100A34418 /* VC */,
 				C3CB7A3E1FB9BD2A00A34418 /* Model */,
@@ -253,6 +256,7 @@
 				C3CB7A2F1FB9B7A000A34418 /* ChatVC.swift in Sources */,
 				C3647EB31FC0B87B00CD41C9 /* APIClient.swift in Sources */,
 				C3CB7A2D1FB9B7A000A34418 /* AppDelegate.swift in Sources */,
+				C38F7C5B1FCC325800B3E736 /* Helpers.swift in Sources */,
 				C366751A1FB9D85D00A94AC2 /* ServerMessage.swift in Sources */,
 				C36675161FB9C45300A94AC2 /* ServerRequest.swift in Sources */,
 				C36675181FB9D2DF00A94AC2 /* ServiceResponse.swift in Sources */,

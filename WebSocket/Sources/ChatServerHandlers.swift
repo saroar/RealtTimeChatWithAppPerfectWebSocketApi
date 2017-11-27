@@ -257,6 +257,7 @@ class ChatWSHandler: WebSocketSessionHandler {
                     if let cmd = decodedDict["cmd"] as? String {
                         switch cmd {
                         case "register":
+                            
                             if let channelid = decodedDict["channelid"] as? String,
                                 let clientid = decodedDict["clientid"] as? String {
                                 let channel = ChatWSHandler.channel(named: channelid)

@@ -20,35 +20,8 @@ struct Params: Codable {
 }
 
 extension ServerResponse {
-    static func from(json: String, using encoding: String.Encoding = .utf8) -> ServerResponse? {
-        guard let data = json.data(using: encoding) else { return nil }
-        return ServerResponse.from(data: data)
-    }
     
-    static func from(data: Data) -> ServerResponse? {
-        let decoder = JSONDecoder()
-        do {
-            return try decoder.decode(ServerResponse.self, from: data)
-        } catch {
-            print(error.localizedDescription)
-            return nil
-        }
-    }
     
-    var jsonData: Data? {
-        let encoder = JSONEncoder()
-        do {
-            return try encoder.encode(self)
-        } catch {
-            print(error.localizedDescription)
-            return nil
-        }
-    }
-    
-    var jsonString: String? {
-        guard let data = self.jsonData else { return nil }
-        return String(data: data, encoding: .utf8)
-    }
 }
 
 extension ServerResponse {
