@@ -43,7 +43,7 @@ extension Decodable {
     }
 }
 
-// May be 
+// May be
 //extension Encodable {
 //    func encode(data: Data) throws -> Data {
 //        let encoder = JSONEncoder()

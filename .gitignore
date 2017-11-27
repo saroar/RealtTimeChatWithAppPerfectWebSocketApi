@@ -78,3 +78,6 @@ WebSocket/PADockerfile_build
 WebSocket/perfectauthserver.service
 WebSocket/.DS_Store
 WebSocket/Package.resolved
+
+
+/RealTimeChatWebSocketAppIOS.xcodeproj/project.pbxproj
